@@ -14,7 +14,7 @@ const UserSchema = new mongoose.Schema({
     unique: [true, 'Пользователь с этой почтой уже зарегистрирован'],
     validate: {
       validator: (email) => validator.isEmail(email),
-      message: 'Запишите адрес почты в формате: email@address.ru',
+      message: 'Укажите адрес почты в формате: email@host.ru',
     },
   },
   password: {
