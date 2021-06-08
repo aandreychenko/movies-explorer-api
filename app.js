@@ -11,6 +11,7 @@ const { login } = require('./controllers/login');
 const { createUser } = require('./controllers/createUser');
 const { auth } = require('./middlewares/auth');
 const { NotFoundErr } = require('./errors/index');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3001 } = process.env;
 const app = express();
@@ -25,6 +26,8 @@ mongoose.connect('mongodb://localhost:27017/movieexpdb', {
 
 app.use(express.json());
 
+app.use(requestLogger);
+
 app.use('/users', auth, userRouter);
 app.use('/movies', auth, movieRouter);
 
@@ -35,6 +38,7 @@ app.use('*', () => {
   throw new NotFoundErr('Ресурс не найден');
 });
 
+app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 
