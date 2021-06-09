@@ -1,10 +1,12 @@
+/* import modules */
 const { Joi, celebrate } = require('celebrate');
 const { ObjectId } = require('mongoose').Types;
 const validator = require('validator');
 
+/* define valdation for different kind of requests */
 const validateObjId = celebrate({
   params: Joi.object().keys({
-    id: Joi.string().required().custom((value, helpers) => {
+    movieId: Joi.string().required().custom((value, helpers) => {
       if (ObjectId.isValid(value)) {
         return value;
       }

@@ -1,7 +1,9 @@
+/* import modules */
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const { BadRequestErr, RegistrationErr } = require('../errors/index');
 
+/* define controller for creating user request */
 module.exports.createUser = (req, res, next) => {
   const {
     name,
@@ -9,10 +11,12 @@ module.exports.createUser = (req, res, next) => {
     password,
   } = req.body;
 
+  /* check if we got email and password */
   if (!email || !password) {
     throw new BadRequestErr('Не передан email или пароль');
   }
 
+  /* return password hash */
   return bcrypt.hash(password, 10)
     .then((hash) => {
       User.create({

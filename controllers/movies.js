@@ -1,6 +1,8 @@
+/* import modules */
 const Movie = require('../models/Movie');
 const { NotFoundErr, BadRequestErr, ForbiddenErr } = require('../errors/index');
 
+/* define controllers for processing movie requests */
 module.exports.getMovies = (req, res, next) => {
   Movie.find({})
     .then((movies) => {
@@ -71,7 +73,7 @@ module.exports.postMovie = (req, res, next) => {
 };
 
 module.exports.deleteMovie = (req, res, next) => {
-  Movie.findById(req.params.id)
+  Movie.findById(req.params.movieId)
     .orFail(() => {
       throw new NotFoundErr('Фильм не найден');
     })

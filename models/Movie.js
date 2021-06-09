@@ -1,6 +1,7 @@
 const validator = require('validator');
 const mongoose = require('mongoose');
 
+/* define movie schema for mongo database */
 const MovieSchema = new mongoose.Schema({
   country: {
     type: String,
@@ -66,4 +67,5 @@ const MovieSchema = new mongoose.Schema({
   },
 });
 
+/* make model for js and mongo interacting */
 module.exports = mongoose.model('Movie', MovieSchema);

@@ -1,6 +1,7 @@
 const validator = require('validator');
 const mongoose = require('mongoose');
 
+/* define user schema for mongo database */
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -25,4 +26,5 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
+/* make model for js and mongo interacting */
 module.exports = mongoose.model('User', UserSchema);

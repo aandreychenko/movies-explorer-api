@@ -1,6 +1,8 @@
+/* import modules */
 const User = require('../models/User');
 const { NotFoundErr, BadRequestErr } = require('../errors/index');
 
+/* define controllers for processing user requests */
 module.exports.getUserInfo = (req, res, next) => {
   User.findById(req.user._id)
     .orFail(() => {
