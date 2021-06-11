@@ -107,6 +107,11 @@ const validateUserUpdate = celebrate({
         'string.max': 'Максимальная длина поля "name" - 30',
         'any.required': 'Поле "name" должно быть заполнено',
       }),
+    email: Joi.string().required().email()
+      .message('Поле "email" должно быть валидным email-адресом')
+      .messages({
+        'string.required': 'Поле "email" должно быть заполнено',
+      }),
   }),
 });
 
