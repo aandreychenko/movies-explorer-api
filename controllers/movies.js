@@ -12,9 +12,7 @@ module.exports.getMovies = (req, res, next) => {
         res.send(movies);
       }
     })
-    .catch((err) => {
-      next(err);
-    });
+    .catch(next);
 };
 
 module.exports.postMovie = (req, res, next) => {
@@ -65,11 +63,12 @@ module.exports.postMovie = (req, res, next) => {
         next(new BadRequestErr(`${Object.values(err.errors).map((error) => error.message).join(', ')}`));
       }
       if (err.kind === 'ObjectId') {
-        next(new BadRequestErr(`${Object.values(err.errors).map((error) => error.message).join(', ')}`));
+        throw new BadRequestErr(`${Object.values(err.errors).map((error) => error.message).join(', ')}`);
       }
 
-      next(err);
-    });
+      throw err;
+    })
+    .catch(next);
 };
 
 module.exports.deleteMovie = (req, res, next) => {
@@ -98,15 +97,13 @@ module.exports.deleteMovie = (req, res, next) => {
           })
           .catch((err) => {
             if (err.kind === 'ObjectId') {
-              next(new BadRequestErr(`${Object.values(err.errors).map((error) => error.message).join(', ')}`));
+              throw new BadRequestErr(`${Object.values(err.errors).map((error) => error.message).join(', ')}`);
             }
-            next(err);
+            throw err;
           });
       } else {
         throw new ForbiddenErr('Нельзя удалить чужой фильм');
       }
     })
-    .catch((err) => {
-      next(err);
-    });
+    .catch(next);
 };

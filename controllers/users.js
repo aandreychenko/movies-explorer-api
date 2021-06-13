@@ -13,9 +13,7 @@ module.exports.getUserInfo = (req, res, next) => {
       email: user.email,
       _id: user._id,
     }))
-    .catch((err) => {
-      next(err);
-    });
+    .catch(next);
 };
 
 module.exports.updateUserInfo = (req, res, next) => {
@@ -32,9 +30,10 @@ module.exports.updateUserInfo = (req, res, next) => {
     }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestErr(`${Object.values(err.errors).map((error) => error.message).join(', ')}`));
+        throw new BadRequestErr(`${Object.values(err.errors).map((error) => error.message).join(', ')}`);
       }
 
-      next(err);
-    });
+      throw err;
+    })
+    .catch(next);
 };

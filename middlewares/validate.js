@@ -91,7 +91,7 @@ const validateUserRegistration = celebrate({
       .messages({
         'any.required': 'Поле "email" должно быть заполнено',
       }),
-    name: Joi.string().min(2).max(30)
+    name: Joi.string().required().min(2).max(30)
       .messages({
         'string.min': 'Минимальная длина поля "name" - 2',
         'string.max': 'Максимальная длина поля "name" - 30',
