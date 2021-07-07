@@ -25,6 +25,9 @@ mongoose.connect(NODE_ENV === 'production' ? MONGODB : 'mongodb://localhost:2701
   useUnifiedTopology: true,
 });
 
+/* allow cors */
+app.use(cors());
+
 /* do request logs */
 app.use(requestLogger);
 
@@ -36,9 +39,6 @@ app.use(helmet());
 
 /* use json in requests */
 app.use(express.json());
-
-/* allow cors */
-app.use(cors());
 
 /* use routes */
 app.use(routes);
