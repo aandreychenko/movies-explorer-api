@@ -4,9 +4,10 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const express = require('express');
 const { errors } = require('celebrate');
+const helmet = require('helmet');
+const cors = require('cors');
 const routes = require('./routes');
 const limiter = require('./middlewares/limiter');
-const helmet = require('helmet');
 const errorHandler = require('./middlewares/error-handler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
@@ -35,6 +36,9 @@ app.use(helmet());
 
 /* use json in requests */
 app.use(express.json());
+
+/* allow cors */
+app.use(cors());
 
 /* use routes */
 app.use(routes);
