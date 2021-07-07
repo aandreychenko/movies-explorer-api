@@ -4,9 +4,9 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const express = require('express');
 const { errors } = require('celebrate');
+const helmet = require('helmet');
 const routes = require('./routes');
 const limiter = require('./middlewares/limiter');
-const helmet = require('helmet');
 const errorHandler = require('./middlewares/error-handler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
